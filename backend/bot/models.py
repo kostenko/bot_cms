@@ -9,4 +9,4 @@ class State(models.Model):
 class Transition(models.Model):
     original_state = models.ForeignKey(State, related_name='original_state', on_delete=models.CASCADE)
     target_state = models.ForeignKey(State, related_name='target_state', on_delete=models.CASCADE)
-    trigger = models.CharField(max_length=100)
+    trigger = models.CharField(max_length=100, blank=True)
