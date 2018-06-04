@@ -12,4 +12,4 @@ def index(request):
 def state_get(request):
     state = bot.models.State.objects.latest('timestamp')
 
-    return bot.templates.bot_state_get(state)
+    return bot.templates.state_get_response(state)

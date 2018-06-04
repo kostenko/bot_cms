@@ -1,26 +1,46 @@
-import ResponseList from '../components/ResponseList'
+import React, { Component } from 'react'
 import { connect } from 'react-redux'
 
+import { respondToUser } from '../actions'
+import ResponseList from '../components/ResponseList'
 
-const sortResponses = responses => {
+
+const sortResponses = (responses) => {
     return responses
 }
 
-const mapStateToProps = state => {
-    console.log(state)
 
+class ResponseChannel extends Component {
+    render() {
+        return <ResponseList responses={this.props.responses} />
+    }
+
+    componentWillMount() {
+        let context = {}
+
+        this.props.dispatch(
+            respondToUser(context)
+        )
+    }
+}
+
+
+const mapStateToProps = (state) => {
     return {
         responses: sortResponses(state.responses)
     }
 }
 
-const mapDispatchToProps = dispatch => {
-    return {}
+const mapDispatchToProps = (dispatch) => {
+    return {
+        dispatch: dispatch
+    }
 }
 
-const ResponseChannel = connect(
+
+ResponseChannel = connect(
     mapStateToProps,
     mapDispatchToProps
-)(ResponseList)
+)(ResponseChannel)
 
 export default ResponseChannel

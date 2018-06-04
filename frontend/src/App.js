@@ -1,44 +1,22 @@
 import React from 'react';
-import { render } from 'react-dom'
 import { Provider } from 'react-redux'
-import { createStore } from 'redux'
+import { createStore, applyMiddleware } from 'redux'
+import thunk from 'redux-thunk'
+
+import Channel from './containers/Channel'
+import { botReducer } from './reducers'
 
 import logo from './logo.svg';
 import './App.css';
 
 
-////
-
-const initialState = {
-    responses: [
-
-        {
-            text: 'Hello'
-        },
-
-        {
-            text: 'Hello Again'
-        },
-
-    ]
-}
-
-const botApp = (state, action) => {
-    if (typeof state === 'undefined') {
-        return initialState
-    }
-
-    return state
-}
-
-const store = createStore(botApp)
-
-////
-
-import Channel from './containers/Channel'
-
+const store = createStore(
+    botReducer,
+    applyMiddleware(thunk)
+)
 
 const App = () => (
+
   <Provider store={store}>
     <div className="App">
         <div className="App-header">

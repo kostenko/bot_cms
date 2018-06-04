@@ -5,7 +5,7 @@ import django.http
 import bot.models
 
 
-def bot_state_get(state: bot.models.State):
+def state_get_response(state: bot.models.State):
     state = {
         'text': state.answer_text,
     }
